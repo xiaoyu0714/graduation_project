@@ -25,8 +25,8 @@ $(function() {
 			psd_state.parent().next().next().css("display", "block");
 			return false;
 		} else {
-			name_state.parent().next().next().css("display", "none");
-			psd_state.parent().next().next().css("display", "none");
+			// name_state.parent().next().next().css("display", "none");
+			// psd_state.parent().next().next().css("display", "none");
 			$('.login').submit();
 		}
 	});
@@ -115,7 +115,8 @@ function barter_btn(bb) {
 
 <div class="login_div">
 	<div class="col-xs-12 login_title">登录</div>
-	<form action="index" class="login" method="post">
+
+	<form action="verify" class="login" method="POST">
 		{% csrf_token %}
 		<div class="nav">
 			<div class="nav login_nav">
@@ -123,7 +124,8 @@ function barter_btn(bb) {
 					用户名:
 				</div>
 				<div class="col-xs-6 login_usernameInput">
-					<input type="text" name="" id="name" value="" placeholder="&nbsp;&nbsp;用户名/手机号"  onblur="javascript:ok_or_errorBylogin(this)" />
+					<input type="text" name="name" id="name" value=""
+						placeholder="&nbsp;&nbsp;用户名/手机号"  onblur="javascript:ok_or_errorBylogin(this)" />
 				</div>
 				<div class="col-xs-1 ok_gou">
 					√
@@ -137,7 +139,8 @@ function barter_btn(bb) {
 					密&nbsp;&nbsp;&nbsp;码:
 				</div>
 				<div class="col-xs-6">
-					<input type="password" name="" id="psd" value="" placeholder="&nbsp;&nbsp;密码" onBlur="javascript:ok_or_errorBylogin(this)" />
+					<input type="password" name="pwd" id="psd" value=""
+						placeholder="&nbsp;&nbsp;密码" onBlur="javascript:ok_or_errorBylogin(this)" />
 				</div>
 				<div class="col-xs-1 ok_gou">
 					√
