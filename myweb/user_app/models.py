@@ -6,3 +6,4 @@ class User(models.Model):
 
     name = models.CharField(max_length=10)
     pwd = models.CharField(max_length=10)
+
