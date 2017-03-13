@@ -7,10 +7,11 @@
 		<link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min2.css' %}" rel="stylesheet">
 		<link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
 		<link href="{% static 'css/index.css' %}" rel="stylesheet">
+		<link href="{% static 'css/share.css' %}" rel="stylesheet">
 		<title></title>
 	</head>
 	<body>
-
+		
 	<div class="container-fluid">
 	<div class="row-fluid" id="row1">
 		<div class="span2">  
@@ -45,34 +46,49 @@
 	</div>
 	<div class="row-fluid" id="row2">
 		<div class="span2"></div>
-		<div class="span3" style="background-color:;height: 100%;">
-			<div class="headportrait" style="background-color: #0074CC;height: 50%;margin-top: 10px;">
-				<img src="{% static 'img/a.jpg' %}" class="img-rounded" style="height:60%;margin-left: 25%;margin-top:10% ;" >
+		<div class="span1"></div>
+		<div class="span6" id="row3">
+			<div class="row-fluid">
+			<table width="90%" height="auto" border="0" align="right" cellpadding="0" cellspacing="0">
+			    <tr>
+					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: white;">物品名称：</h4>
+    				<td height="45" align="left">
+    					<input name="textfield" type="text" class="mytextfield" id="" value="" maxlength="60" />
+					</td> 
+					</td>
+			    </tr>
+			    <tr>
+					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: white;">件数：</h4>
+    				<td height="45" align="left">
+    					<input style="width:20%" type="text" class="mytextfield" id="" value="" maxlength="60" />
+					</td> 
+					</td>
+			    </tr>
+			    <tr>
+					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: white;">图片：</h4>
+    				<td height="" align="left">
+    					<input style="color: white;" name="file" type="file" class="myfile" />
+					</td> 
+					</td>
+			    </tr>
+			    <tr> 
+			    	<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: white;">物品简介：</h4>
+			    	<td  height="150" colspan="3" valign="middle" scope="row">
+			    		<textarea style="margin-top: 10px;width: 80%;" name="textarea" cols="25" rows="10" class="mytextarea" id="plan_c" style="color:#999" onfocus="if(this.value=='请描述一下你的物品…') this.value='';" onblur="if(this.value=='')this.value='请描述一下你的物品…';">请描述一下你的物品…
+			    		</textarea>
+			    	</td>
+			    	
+			    </tr>
+			</table>
 			</div>
-			<div class="name" style="background-color: #0074CC;height: 30%;color: white;margin-top: 10%;">
-				<p>用户名：小雨</p>
-				<p>学院：信息学院</p>
-				<p>简介：帅哥</p>
+			<br>
+			<div class="row-fluid">
+				<input style="margin-left: 45%;" type="submit" class="btn btn-primary" value="登录" id="login" />
 			</div>
 		</div>
-		<div class="span4" style="background-color:;height: 100%;">
-			<div class="orderlist" style="height: 86%;background-color:white;margin-top: 10px;">
-					<div class="item" style="height: 20%;"><font style="float: right;">提交　删除</font>物品1
-						<img src="{% static 'img/a.jpg' %}" style="height: 90%;float: left;">
-					</div>
-					<div class="item" style="height: 20%;"><font style="float: right;">提交　删除</font>物品2
-						<img src="{% static 'img/a.jpg' %}" style="height: 90%;float: left;">
-					</div>
-					<div class="item" style="height: 20%;"><font style="float: right;">提交　删除</font>物品3
-						<img src="{% static 'img/a.jpg' %}" style="height: 90%;float: left;">
-					</div>
-					<div class="item" style="height: 20%;"><font style="float: right;">提交　删除</font>物品4
-						<img src="{% static 'img/a.jpg' %}" style="height: 90%;float: left;">
-					</div>
-			</div>
-		</div>
+		
 		<div class="span2"></div>
-	</div>
+	</div>               
 	<!--div class="row-fluid" id="row3">
 		<div class="span2"></div>
 		<div class="span4">
@@ -83,8 +99,9 @@
 		</div>
 		<div class="span2"></div>
 	</div-->
-	</div>
+</div>
 		<script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
       	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 	</body>
-</html>
+</html>   
+   
