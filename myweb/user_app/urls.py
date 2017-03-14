@@ -11,5 +11,6 @@ urlpatterns = [
    	url(r'^register$',views.register,name='register'),
    	url(r'^modify_personalinfo$',views.modify_personalinfo,name='modify_personalinfo'),
    	url(r'^modify$',views.modify,name='modify')
+
 ]
    
