@@ -6,4 +6,20 @@ class User(models.Model):
 
     name = models.CharField(max_length=10)
     pwd = models.CharField(max_length=10)
+    nickname = models.CharField(max_length=10,null=True)
+    phone = models.CharField(max_length=10,null=True)
+    file = models.CharField(max_length=10,null=True)
+    school = models.CharField(max_length=10,null=True)
+    personal_intro = models.CharField(max_length=20,null=True)
+    
+  
+class Object(models.Model):
+	"""货物类"""
+	
+	
+	objectname = models.CharField(max_length=10)
+	objectnum = models.CharField(max_length=3)
+
+
+
 

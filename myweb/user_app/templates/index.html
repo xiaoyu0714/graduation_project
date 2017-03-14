@@ -16,27 +16,27 @@
 		<div class="span2">  
 		</div>
 		<div class="span2" style="height: 100%;">
-			<img alt="90x90" src="{% static 'img/a.jpg' %}" class="img-circle" style="height: 80%;margin-top:5%;margin-left: 5%;">
+			<img alt="90x90" src="{% static 'img/shared.jpg' %}" class="img-circle" style="height: 80%;margin-top:5%;margin-left: 5%;">
 		</div>
 		<div class="span1"></div>
 		<div class="span1" id="home" style="height: 100%;">
 			<a href="index" class="btn btn-info btn-lg" id="homebutton">
-          	<span class="glyphicon glyphicon-home" style="margin-top: 80%;"></span> 主页
+          	<span class="glyphicon glyphicon-user" style="margin-top: 80%;"></span> 主页
         	</a>
 		</div>
 		<div class="span1" id="home">
 			<a href="things_can_be_borrowed" class="btn btn-info btn-lg" id="homebutton">
-          	<span class="glyphicon glyphicon-home" style="margin-top: 80%;"></span> 借用
+          	<span class="glyphicon glyphicon-shopping-cart" style="margin-top: 80%;"></span> 借用
         	</a>
 		</div>
 		<div class="span1" id="home">
 			<a href="sharethings" class="btn btn-info btn-lg" id="homebutton">
-          	<span class="glyphicon glyphicon-home" style="margin-top: 80%;"></span> 分享
+          	<span class="glyphicon glyphicon-send" style="margin-top: 80%;"></span> 分享
         	</a>
 		</div>
 		<div class="span1" id="home">
-			<a href="#" class="btn btn-info btn-lg" id="homebutton">
-          	<span class="glyphicon glyphicon-home" style="margin-top: 80%;"></span> 管理
+			<a href="../admin" class="btn btn-info btn-lg" id="homebutton">
+          	<span class="glyphicon glyphicon-asterisk" style="margin-top: 80%;"></span> 管理
         	</a>
 		</div>
 		
@@ -47,16 +47,18 @@
 		<div class="span2"></div>
 		<div class="span3" style="background-color:;height: 100%;">
 			<div class="headportrait" style="background-color: #0074CC;height: 50%;margin-top: 10px;">
-				<img src="{% static 'img/a.jpg' %}" class="img-rounded" style="height:60%;margin-left: 25%;margin-top:10% ;" >
+				<img src="{% static 'img/headportrait.jpg' %}" class="img-rounded" style="height:70%;margin-left: 25%;margin-top:10% ;" >
 			</div>
-			<div class="name" style="background-color: #0074CC;height: 30%;color: white;margin-top: 10%;">
+			<div class="name" style=" background-color: #0074CC;height: 30%;color: white;margin-top: 10%;">
 				<p>用户名：小雨</p>
 				<p>学院：信息学院</p>
 				<p>简介：帅哥</p>
 			</div>
 		</div>
 		<div class="span4" style="background-color:;height: 100%;">
-			<div class="orderlist" style="height: 86%;background-color:white;margin-top: 10px;">
+			
+			<div class="orderlist" style="color:white; height: 86%;background-color:#0074CC;margin-top:-10px;">
+				<div><h3>正在使用的物品：</h3></div>
 					<div class="item" style="height: 20%;"><font style="float: right;">提交　删除</font>物品1
 						<img src="{% static 'img/a.jpg' %}" style="height: 90%;float: left;">
 					</div>
