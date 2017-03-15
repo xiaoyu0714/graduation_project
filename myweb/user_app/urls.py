@@ -10,7 +10,8 @@ urlpatterns = [
    	url(r'^things_can_be_borrowed$', views.things_can_be_borrowed, name='things_can_be_borrowed'),
    	url(r'^register$',views.register,name='register'),
    	url(r'^modify_personalinfo$',views.modify_personalinfo,name='modify_personalinfo'),
-   	url(r'^modify$',views.modify,name='modify')
+   	url(r'^modify$',views.modify,name='modify'),
+   	url(r'^logout$',views.logout,name='logout')
 
 ]
    

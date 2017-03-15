@@ -1,14 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
+from django.template import loader
 from .models import User
 # Create your views here.
 
-
+def userdata(request):
+	user = serializers.deserialize("json", request.session['user'], ignorenonexistent=True).__next__().object
+	context = {'user':user}
+	template = loader.get_template('index.html')
+	return HttpResponse(template.render(context, request))   
 
 
 def index(request):
-    return render(request,'index.html')
+	return userdata(request)
+	
 
 def login(request):
     return render(request,'login.html')
@@ -17,8 +23,8 @@ def verify(request):
     user = User.objects.all().filter(name=request.POST['name'],pwd=request.POST['pwd'])
     if user:
         request.session['user'] = serializers.serialize('json',user)
-        return render(request,'user_home.html')
-    else:
+        return userdata(request)
+    else: 
         return render(request,'login_fail.html')
 
 def sharethings(request):
@@ -37,6 +43,23 @@ def modify_personalinfo(request):
 	return render(request,'modify_personalinfo.html')
 	
 def modify(request):
-	user = User(nickname=request.POST['nickname'],phone=request.POST['phone'],school=request.POST['school'],file=request.POST['file'],personal_intro=request.POST['personal_intro'])
+	user = serializers.deserialize("json", request.session['user'], ignorenonexistent=True).__next__().object
+	print(type(user))
+	user.nickname = request.POST['nickname']
+	user.phone = request.POST['phone']
+	user.school = request.POST['school']
+	user.file=request.POST['file']
+	user.personal_intro=request.POST['personal_intro']
 	user.save()
-	return render(request,'index.html')     
+	context = {'user':user}
+	request.session['user'] = serializers.serialize('json',User.objects.all().filter(pk=user.pk))
+	template = loader.get_template('index.html')
+	return HttpResponse(template.render(context, request)) 
+	
+def logout(request):
+	request.session['user'] = None
+	return render(request,'login.html')
+	
+
+
+  
