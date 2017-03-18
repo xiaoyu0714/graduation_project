@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min2.css' %}" rel="stylesheet">
+		<!--link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min2.css' %}" rel="stylesheet"-->
 		<link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
 		<link href="{% static 'css/index.css' %}" rel="stylesheet">
 		<link href="{% static 'css/share.css' %}" rel="stylesheet">
@@ -13,75 +13,89 @@
 	<body>
 		
 	<div class="container-fluid">
-	<div class="row-fluid" id="row1">
-		<div class="span2">  
+	<div class="row clearfix" id="row1">
+		<div class="col-md-2 column">  
 		</div>
-		<div class="span2" style="height: 100%;">
+		<div class="col-md-2 column" style="height: 100%;">
 			<img alt="90x90" src="{% static 'img/shared.jpg' %}" class="img-circle" style="height: 80%;margin-top:5%;margin-left: 5%;">
 		</div>
-		<div class="span1"></div>
-		<div class="span1" id="home" style="height: 100%;">
+		
+		<div class="col-md-1 column" id="home" style="height: 100%;">
 			<a href="index" class="btn btn-info btn-lg" id="homebutton">
-          	<span class="glyphicon glyphicon-user" style="margin-top: 80%;"></span> 主页
+          	<span class="glyphicon glyphicon-home" style="margin-top: 80%;"></span> 首页
         	</a>
 		</div>
-		<div class="span1" id="home">
-			<a href="things_can_be_borrowed" class="btn btn-info btn-lg" id="homebutton">
-          	<span class="glyphicon glyphicon-shopping-cart" style="margin-top: 80%;"></span> 借用
-        	</a>
-		</div>
-		<div class="span1" id="home">
+		<div class="col-md-1 column" id="home">
 			<a href="sharethings" class="btn btn-info btn-lg" id="homebutton">
           	<span class="glyphicon glyphicon-send" style="margin-top: 80%;"></span> 分享
         	</a>
 		</div>
-		<div class="span1" id="home">
+		<div class="col-md-1 column" id="home">
+			<a href="index_per" class="btn btn-info btn-lg" id="homebutton">
+          	<span class="glyphicon glyphicon-user" style="margin-top: 80%;"></span> 用户
+        	</a>
+		</div>
+		<div class="col-md-1 column" id="home">
 			<a href="../admin" class="btn btn-info btn-lg" id="homebutton">
           	<span class="glyphicon glyphicon-asterisk" style="margin-top: 80%;"></span> 管理
         	</a>
 		</div>
 		
+		<div class="col-md-2 column" style="color: white;" id="greeting">
+			{% if user %}
+				   
+				<p>{{ user.nickname }},你好|<a href="/user/logout" style="color: white;">退出</a></p>
+			
+			{% else %}
+				<p>你好|<a href="/user/logout" style="color: white;">退出</a></p>
+			
+			{% endif %}
+			
+		</div>
 		
-		<div class="span2"></div>
+		
+		<div class="col-md-2 column"></div>
 	</div>
-	<div class="row-fluid" id="row2">
-		<div class="span2"></div>
-		<div class="span1"></div>
-		<div class="span6" id="row3">
-			<div class="row-fluid">
+
+	<div class="row clearfix" id="row2">
+		<div class="col-md-2 column"></div>
+		<div class="col-md-7 column" id="row3">
+			<div class="row clearfix">
+			<div class="col-md-2 column"></div>
+			<div class="col-md-9 column">
 			<form action="modify" class="personalinfomation" method="POST">
 			{% csrf_token %} 
 			<table width="90%" height="auto" border="0" align="right" cellpadding="0" cellspacing="0">
 			    <tr>
-					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: white;">昵称：</h4>
+					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">昵称：</h4>
     				<td height="45" align="left">
     					<input name="nickname" type="text" class="mytextfield" id="" value="" maxlength="10" />
 					</td> 
 					</td>
 			    </tr>
 			    <tr>
-					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: white;">手机：</h4>
+					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">手机：</h4>
     				<td height="45" align="left">
     					<input name="phone" type="text" class="mytextfield" id="" value="" maxlength="11" />
 					</td> 
 					</td>
 			    </tr>
 			    <tr>
-					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: white;">学院：</h4>
+					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">学院：</h4>
     				<td height="45" align="left">
     					<input name="school" style="width:20%" type="text" class="mytextfield" id="" value="" maxlength="10" />
 					</td> 
 					</td>
 			    </tr>
 			    <tr>
-					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: white;">头像：</h4>
+					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">头像：</h4>
     				<td height="" align="left">
-    					<input style="color: white;" name="file" type="file" class="myfile" />
+    					<input style="" name="file" type="file" class="myfile" />
 					</td> 
 					</td>
 			    </tr>
 			    <tr> 
-			    	<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: white;">个人简介：</h4>
+			    	<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">个人简介：</h4>
 			    	<td  height="150" colspan="3" valign="middle" scope="row">
 			    		<textarea style="margin-top: 10px;width: 80%;" name="personal_intro" cols="25" rows="10" class="mytextarea" id="plan_c" style="color:#999" onfocus="if(this.value=='请简单介绍一下你自己…') this.value='';" onblur="if(this.value=='')this.value='请简单介绍一下你自己…';">请简单介绍一下你自己…
 			    		</textarea>
@@ -90,14 +104,15 @@
 			    </tr>
 			</table>
 			</div>
+			</div>
 			<br>
-			<div class="row-fluid">
+			<div class="row clearfix">
 				<input style="margin-left: 45%;" type="submit" class="btn btn-primary" value="登录" id="" />
 			</div>
 		</div>
 		</form>
 		
-		<div class="span2"></div>
+		<div class="col-md-2 column"></div>
 	</div>               
 	<!--div class="row-fluid" id="row3">
 		<div class="span2"></div>

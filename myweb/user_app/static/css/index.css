@@ -3,6 +3,55 @@ html,body{height:100%;}
 	background-color: #EBEBEB;
 	height: 100%;
 }
+.headportrait,.orderlist {
+	background-color: #FFFFFF;
+	border: 1px soild#999;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 10px;
+	height: 45%;
+	 outline: 0;
+	-webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+          box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+          margin-top: 10px;
+}
+.per_info{
+	background-color: #FFFFFF;
+	border: 1px soild#999;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 10px;
+	height: 35%;
+	 outline: 0;
+	-webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+          box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    margin-top: 35px;
+	
+}
+.orderlist{
+	padding: 10px;
+}
+.per_info ul p{
+	height: 15%;
+	margin-left: -20px;
+	margin-top: 5px;
+}
+.list-group-item{
+	height: 100%;
+	border: none;
+	border-color: #FFFFFF;
+	
+}
+.myshare{
+	background-color: #FFFFFF;
+	border: 1px soild#999;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 10px;
+	height: 300px;
+	 outline: 0;
+	-webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+          box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    margin-top: -30px;
+    padding: 10px;
+}
 #row1{
 	background-color: #434343;
 	height: 20%;
@@ -16,16 +65,29 @@ html,body{height:100%;}
 	border: none;
 	color: white;
 	
-}
+} 
+#greeting p{
+	margin-top: 90px;
+	height: 100%;
+} 
 #row2{
-	background-color: #0055CC;
+	background-color: #EDEDED;
 	height: 85%;
 }
-p{
-	height: 15%;
-	margin-left: 30%;
-	margin-top: 5%;
+#row3{
+	background-color: #EDEDED;
+	height: 50%;
 }
+#item{
+	height: 20%;
+}
+#itempic{
+	height: 100%;
+}
+#itempic img{
+	height: 90%;
+}
+
 /*#row3{
 	background-color:  #49AFCD;
 	height: 40%;

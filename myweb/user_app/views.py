@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.core import serializers
 from django.template import loader
 from .models import User
+
+
 # Create your views here.
 
 def userdata(request):
@@ -30,8 +32,8 @@ def verify(request):
 def sharethings(request):
 	return render(request,'sharethings.html')
 
-def things_can_be_borrowed(request):
-	return render(request,'things_can_be_borrowed.html')
+def index_per(request):
+	return render(request,'index_per.html')
 
 def register(request):
 	user = User(name=request.POST['namer'],pwd=request.POST['pwdr'])
@@ -41,14 +43,14 @@ def register(request):
 	
 def modify_personalinfo(request):
 	return render(request,'modify_personalinfo.html')
-	
+		
 def modify(request):
 	user = serializers.deserialize("json", request.session['user'], ignorenonexistent=True).__next__().object
 	print(type(user))
 	user.nickname = request.POST['nickname']
 	user.phone = request.POST['phone']
 	user.school = request.POST['school']
-	user.file=request.POST['file']
+	# user.file= upload_file(request)
 	user.personal_intro=request.POST['personal_intro']
 	user.save()
 	context = {'user':user}
@@ -59,6 +61,9 @@ def modify(request):
 def logout(request):
 	request.session['user'] = None
 	return render(request,'login.html')
+	
+	
+
 	
 
 
