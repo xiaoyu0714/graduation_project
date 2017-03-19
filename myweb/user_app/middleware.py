@@ -10,8 +10,12 @@ class LoginMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
         if (
-            not request.path.endswith('/login') and 'static' not in request.path
-            and 'verify' not in request.path):
+            not request.path.endswith('/login')
+            and 'static' not in request.path
+            and 'test' not in request.path
+            and 'verify' not in request.path
+            and 'register' not in request.path
+            and 'admin' not in  request.path):
             if request.session.get('user',None):
                 pass
             else:
