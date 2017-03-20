@@ -7,6 +7,9 @@ from .models import User
 
 # Create your views here.
 
+def hello(request):
+    return HttpResponse("Hello world ! ")
+
 def userdata(request):
 	user = serializers.deserialize("json", request.session['user'], ignorenonexistent=True).__next__().object
 	context = {'user':user}
@@ -22,12 +25,14 @@ def login(request):
     return render(request,'login.html')
 
 def verify(request):
+    print(request.POST)
     user = User.objects.all().filter(name=request.POST['name'],pwd=request.POST['pwd'])
+    print(user)
     if user:
         request.session['user'] = serializers.serialize('json',user)
-        return userdata(request)
+        return hello(request)
     else: 
-        return render(request,'login_fail.html')
+    	return render(request,'login_fail.html')
 
 def sharethings(request):
 	return render(request,'sharethings.html')
