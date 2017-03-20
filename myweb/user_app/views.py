@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse
 from django.core import serializers
 from django.template import loader
 from .models import User
-from .forms import UploadFileForm
+
 
 # Create your views here.
 
@@ -13,8 +13,10 @@ def userdata(request):
 	template = loader.get_template('index.html')
 	return HttpResponse(template.render(context, request))
 
+
 def index(request):
 	return userdata(request)
+
 
 def login(request):
     return render(request,'login.html')
@@ -31,12 +33,13 @@ def sharethings(request):
 	return render(request,'sharethings.html')
 
 def person(request):
-	return render(request,'person.html')
+	return render(request,'index_per.html')
 
 def register(request):
 	user = User(name=request.POST['namer'],pwd=request.POST['pwdr'])
 	user.save()
 	return render(request,'login.html')
+
 
 def modify_personalinfo(request):
 	return render(request,'modify_personalinfo.html')

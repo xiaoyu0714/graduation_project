@@ -27,8 +27,41 @@ $(function() {
 		} else {
 			// name_state.parent().next().next().css("display", "none");
 			// psd_state.parent().next().next().css("display", "none");
-			$('.login').submit();
-		}
+			
+				  var xmlhttp;
+				  if (window.XMLHttpRequest)
+				  {
+				    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+				    xmlhttp=new XMLHttpRequest();
+				  }
+				  else
+				  {
+				    // IE6, IE5 浏览器执行代码
+				    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				  xmlhttp.onreadystatechange=function()
+				  {
+				    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				    {
+				      alert(xmlhttp.responseText)
+				      if (xmlhttp.responseText == true){
+				      	alert('ss')
+				      	//window.location.href="index";
+				      }
+				      else {
+				      	alert("username or password is incorrect");
+				      }
+				      	 
+				    }else{
+				    	//alert('a')
+				    }
+				  }  
+				  xmlhttp.open("POST","/user/verify",true);
+				  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				  xmlhttp.send("name=123456&csrfmiddlewaretoken=9GsU75hBDg0921qwi2Po1mAGXgtELJcpYkzHGkNkGMEcxbAPmJ5B1wkg7KcQb1AN&pwd=aaa");
+				    
+			}
+				
 	});
 	$('#register').click(function() {
 		var name_r_state = $('#name_r');
@@ -104,6 +137,7 @@ function ok_or_errorByRegister(r) {
 	}
 }
 
+
 function barter_btn(bb) {
 	$(bb).parent().parent().fadeOut(1000);
 	$(bb).parent().parent().siblings().fadeIn(2000);
@@ -116,7 +150,7 @@ function barter_btn(bb) {
 <div class="login_div">
 	<div class="col-xs-12 login_title">登录</div>
 
-	<form action="verify" class="login" method="POST">
+	<form action="" class="login" method="POST">
 		{% csrf_token %}
 		<div class="nav">
 			<div class="nav login_nav">
@@ -150,7 +184,7 @@ function barter_btn(bb) {
 				</div>
 			</div>
 			<div class="col-xs-12 login_btn_div">
-				<input type="submit" class="sub_btn" value="登录" id="login" />
+				<button class="sub_btn" value="登录" id="login" />登录
 			</div>
 		</div>
 	</form>
