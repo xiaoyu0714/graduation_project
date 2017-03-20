@@ -9,6 +9,13 @@
 		<link href="{% static 'css/index.css' %}" rel="stylesheet">
 		<link href="{% static 'css/things.css' %}" rel="stylesheet">
 		<title></title>
+		<script>
+		function share()
+		{
+			x=document.getElementById("row2");  // 找到元素
+			x.innerHTML="Hello JavaScript!";    // 改变内容
+		}
+		</script>
 	</head>
 	<body>
 		
@@ -26,7 +33,7 @@
         	</a>
 		</div>
 		<div class="col-md-1 column" id="home">
-			<a href="sharethings" class="btn btn-info btn-lg" id="homebutton">
+			<a class="btn btn-info btn-lg" id="homebutton" onclick="share()">
           	<span class="glyphicon glyphicon-send" style="margin-top: 80%;"></span> 分享
         	</a>
 		</div>

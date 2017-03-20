@@ -4,7 +4,6 @@ from django.core import serializers
 from django.template import loader
 from .models import User
 
-
 # Create your views here.
 
 def userdata(request):
