@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import Form,ModelForm
 
 # Create your models here.
 class User(models.Model):
@@ -15,15 +16,15 @@ class User(models.Model):
 class Object(models.Model):
 
     """货物类"""
-    objectname = models.CharField(max_length=10)
-    objectnum = models.IntegerField()
+    name = models.CharField(max_length=10)
+    description = models.CharField(max_length=100,default='')
+    num = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
 class Order(models.Model):
 
     """订单类"""
-    user = models.ForeignKey(User,null=True)
-    object = models.ForeignKey(Object,null=True)
+    user = models.ForeignKey(User)
+    object = models.ForeignKey(Object)
     num = models.IntegerField()
     borrow_date = models.DateField(auto_now_add=True)
-    
