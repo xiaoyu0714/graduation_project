@@ -1,10 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <body>
-		<form class="" action="test" method="post">
+		<form class="" action="test" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 			{{ form }}
 			<input type="submit" name="" value="提交">
 		</form>
+
+		<form class="" action="tmp" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<input type="text" name="id" value="id">
+			<input type="file" name="File" value="File">
+			<input type="submit" name="" value="提交">
+		</form>
+
+		{% for obj in obj_list %}
+		    <input type="radio" name="obj" id="obj{{ forloop.counter }}" value="{{ obj.id }}" />
+		    <label for="obj{{ forloop.counter }}">{{ obj.name }}</label><br />
+			<img src="{% static ''%}img/{{ obj.img }}" alt="" height="40" width="40">
+		{% endfor %}
 </body>
 </html>

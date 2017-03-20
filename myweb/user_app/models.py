@@ -17,9 +17,11 @@ class Object(models.Model):
 
     """货物类"""
     name = models.CharField(max_length=10)
-    description = models.CharField(max_length=100,default='')
+    description = models.CharField(max_length=100)
     num = models.IntegerField()
+    img = models.FileField(default='static/img/default.png')
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+
 
 class Order(models.Model):
 

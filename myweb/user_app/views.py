@@ -5,7 +5,7 @@ from django.template import loader
 
 from .models import User,Object
 from .forms import UploadFileForm
-
+from .utils import handle_uploaded_file
 # Create your views here.
 
 def get_session_user(request):
@@ -64,23 +64,30 @@ def logout(request):
 	request.session['user'] = None
 	return render(request,'login.html')
 
-# def object_upload(request):
-# 	"""用户新增物品"""
-# 	if request.method == 'POST':
-# 		form = (request,POST,request.FILES)
-# 		if form.is_valid():
-# 			form.save()
-
 def test(request):
 	if request.method == 'POST':
+		# print(request.POST)
+		form = UploadFileForm(request.POST,request.FILES)
+		if form.is_valid():
+			handle_uploaded_file(request.FILES['file'])
 
-		obj = Object(name=request.POST['obj_name'],
-						description=request.POST['obj_desc'],
-						num=request.POST['obj_num'],
-						user=get_session_user(request))
-		obj.save()
-		return render(request,'test.html',{'form':None})
+			obj = Object(name=form.cleaned_data['obj_name'],
+						 description=form.cleaned_data['desc'],
+						 num=form.cleaned_data['obj_num'],
+						 img=request.FILES['file'],
+						 user=get_session_user(request))
+			obj.save()
+			
+		return render(request,'test.html')
 	else:
 		form = UploadFileForm()
-		
+
 	return render(request,'test.html',{'form':form})
+
+def tmp(request):
+	if request.method == 'POST':
+		pass
+	else:
+		form = UploadFileForm()
+		obj_list = Object.objects.all()
+	return render(request,'test.html',{'form':form,'obj_list':obj_list})
