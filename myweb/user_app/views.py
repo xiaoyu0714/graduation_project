@@ -11,23 +11,23 @@ def userdata(request):
 	user = serializers.deserialize("json", request.session['user'], ignorenonexistent=True).__next__().object
 	context = {'user':user}
 	template = loader.get_template('index.html')
-	return HttpResponse(template.render(context, request))   
+	return HttpResponse(template.render(context, request))
 
 
 def index(request):
 	return userdata(request)
-	
+
 
 def login(request):
     return render(request,'login.html')
 
 def verify(request):
-    user = User.objects.all().filter(name=request.POST['name'],pwd=request.POST['pwd'])
-    if user:  
-        request.session['user'] = serializers.serialize('json',user)
-        return userdata(request)
-    else: 
-    	return render(request,'login_fail.html')
+	user = User.objects.all().filter(name=request.POST['name'],pwd=request.POST['pwd'])
+	if user:
+		request.session['user'] = serializers.serialize('json',user)
+		return HttpResponse('login=1')
+	else:
+		return HttpResponse('login=0')
 
 def sharethings(request):
 	return render(request,'sharethings.html')
@@ -39,11 +39,11 @@ def register(request):
 	user = User(name=request.POST['namer'],pwd=request.POST['pwdr'])
 	user.save()
 	return render(request,'login.html')
-	
-	
+
+
 def modify_personalinfo(request):
 	return render(request,'modify_personalinfo.html')
-		
+
 def modify(request):
 	user = serializers.deserialize("json", request.session['user'], ignorenonexistent=True).__next__().object
 	print(type(user))
@@ -56,8 +56,8 @@ def modify(request):
 	context = {'user':user}
 	request.session['user'] = serializers.serialize('json',User.objects.all().filter(pk=user.pk))
 	template = loader.get_template('index.html')
-	return HttpResponse(template.render(context, request)) 
-	
+	return HttpResponse(template.render(context, request))
+
 def logout(request):
 	request.session['user'] = None
 	return render(request,'login.html')
@@ -72,10 +72,3 @@ def test(request):
 		form = UploadFileForm()
 
 	return render(request,'test.html',{'form':form})
-	
-	
-
-	
-
-
-  

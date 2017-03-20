@@ -41,25 +41,24 @@ $(function() {
 				  }
 				  xmlhttp.onreadystatechange=function()
 				  {
+				  	//alert(xmlhttp.readyState+','+xmlhttp.status)
 				    if (xmlhttp.readyState==4 && xmlhttp.status==200)
 				    {
-				      alert(xmlhttp.responseText)
-				      if (xmlhttp.responseText == true){
-				      	alert('ss')
-				      	//window.location.href="index";
+				      //alert(xmlhttp.responseText)
+				      if (xmlhttp.responseText == 'login=1'){
+				      	alert('login successfully')
+				      	window.location.href='index';
 				      }
 				      else {
 				      	alert("username or password is incorrect");
 				      }
 				      	 
-				    }else{
-				    	//alert('a')
 				    }
 				  }  
 				  xmlhttp.open("POST","/user/verify",true);
 				  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 				  xmlhttp.send("name=123456&csrfmiddlewaretoken=9GsU75hBDg0921qwi2Po1mAGXgtELJcpYkzHGkNkGMEcxbAPmJ5B1wkg7KcQb1AN&pwd=aaa");
-				    
+				   
 			}
 				
 	});
@@ -150,8 +149,8 @@ function barter_btn(bb) {
 <div class="login_div">
 	<div class="col-xs-12 login_title">登录</div>
 
-	<form action="" class="login" method="POST">
-		{% csrf_token %}
+	<!--form action="" class="login" method="POST"-->
+		
 		<div class="nav">
 			<div class="nav login_nav">
 				<div class="col-xs-4 login_username">
@@ -187,7 +186,7 @@ function barter_btn(bb) {
 				<button class="sub_btn" value="登录" id="login" />登录
 			</div>
 		</div>
-	</form>
+	<!--/form-->
 
 	<div class="col-xs-12 barter_btnDiv">
 		<button class="barter_btn" onClick="javascript:barter_btn(this)">没有账号?前往注册</button>
