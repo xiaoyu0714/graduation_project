@@ -16,9 +16,14 @@ class Object(models.Model):
 
     """货物类"""
     objectname = models.CharField(max_length=10)
-    objectnum = models.CharField(max_length=3)
-    # objectpic = models.
+    objectnum = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
-# class
+class Order(models.Model):
 
     """订单类"""
+    user = models.ForeignKey(User,null=True)
+    object = models.ForeignKey(Object,null=True)
+    num = models.IntegerField()
+    borrow_date = models.DateField(auto_now_add=True)
+    
