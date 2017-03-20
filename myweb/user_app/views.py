@@ -20,12 +20,12 @@ def login(request):
     return render(request,'login.html')
 
 def verify(request):
-    user = User.objects.all().filter(name=request.POST['name'],pwd=request.POST['pwd'])
-    if user:
-        request.session['user'] = serializers.serialize('json',user)
-        return userdata(request)
-    else:
-        return render(request,'login_fail.html')
+	user = User.objects.all().filter(name=request.POST['name'],pwd=request.POST['pwd'])
+	if user:
+		request.session['user'] = serializers.serialize('json',user)
+		return HttpResponse('login=1')
+	else:
+		return HttpResponse('login=0')
 
 def sharethings(request):
 	return render(request,'sharethings.html')
