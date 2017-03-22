@@ -13,9 +13,6 @@ urlpatterns = [
    	url(r'^modify$',views.modify,name='modify'),
    	url(r'^logout$',views.logout,name='logout'),
     url(r'^test$',views.test,name='test'),
-<<<<<<< HEAD
-    url(r'^test_for_refresh$',views.test_for_refresh,name='test_for_refresh')
-=======
+    url(r'^test_for_refresh$',views.test_for_refresh,name='test_for_refresh'),
     url(r'^tmp$',views.tmp,name='tmp')    
->>>>>>> be5b55d12671b60eecccc6c307b92ed29a8383db
 ]
