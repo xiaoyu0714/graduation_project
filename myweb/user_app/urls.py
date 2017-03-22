@@ -12,5 +12,6 @@ urlpatterns = [
    	url(r'^modify_personalinfo$',views.modify_personalinfo,name='modify_personalinfo'),
    	url(r'^modify$',views.modify,name='modify'),
    	url(r'^logout$',views.logout,name='logout'),
-    url(r'^test$',views.test,name='test')
+    url(r'^test$',views.test,name='test'),
+    url(r'^test_for_refresh$',views.test_for_refresh,name='test_for_refresh')
 ]

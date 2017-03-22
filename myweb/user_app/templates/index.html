@@ -8,14 +8,41 @@
 		<link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
 		<link href="{% static 'css/index.css' %}" rel="stylesheet">
 		<link href="{% static 'css/things.css' %}" rel="stylesheet">
-		<title></title>
-		<script>
-		function share()
-		{
-			x=document.getElementById("row2");  // 找到元素
-			x.innerHTML="Hello JavaScript!";    // 改变内容
-		}
+		<script type="text/javascript">
+				function share(){
+				//alert("1");
+				  var xmlhttp;
+				  if (window.XMLHttpRequest)
+				  {
+				    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+				    xmlhttp=new XMLHttpRequest();
+				  }
+				  else
+				  {
+				    // IE6, IE5 浏览器执行代码
+				    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				  xmlhttp.onreadystatechange=function()
+				  {
+				  	//alert(xmlhttp.readyState+','+xmlhttp.status)
+				    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				    {
+				      alert(xmlhttp.responseText)
+				      document.getElementById("row2").innerHTML=xmlhttp.responseText;
+				    }
+				    else{
+				    	alert("ab");
+				    }
+				  }  
+				  xmlhttp.open("POST","/user/test_for_refresh",true);
+				  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				  xmlhttp.send("name=123456&csrfmiddlewaretoken=9GsU75hBDg0921qwi2Po1mAGXgtELJcpYkzHGkNkGMEcxbAPmJ5B1wkg7KcQb1AN&pwd=aaa");
+				   
+				}
+			
 		</script>
+		<title></title>
+
 	</head>
 	<body>
 		
@@ -38,7 +65,7 @@
         	</a>
 		</div>
 		<div class="col-md-1 column" id="home">
-			<a href="index_per" class="btn btn-info btn-lg" id="homebutton">
+			<a class="btn btn-info btn-lg" id="homebutton" onclick="person()">
           	<span class="glyphicon glyphicon-user" style="margin-top: 80%;"></span> 用户
         	</a>
 		</div>
@@ -506,6 +533,7 @@
 		<div class="span2"></div>
 	</div-->
 </div>
+		
 		<script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
       	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
       	
