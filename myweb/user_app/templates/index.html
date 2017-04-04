@@ -8,6 +8,7 @@
 		<link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
 		<link href="{% static 'css/index.css' %}" rel="stylesheet">
 		<link href="{% static 'css/things.css' %}" rel="stylesheet">
+		
 		<script type="text/javascript">
 				function share(){
 				//alert("1");
@@ -27,19 +28,115 @@
 				  	//alert(xmlhttp.readyState+','+xmlhttp.status)
 				    if (xmlhttp.readyState==4 && xmlhttp.status==200)
 				    {
-				      alert(xmlhttp.responseText)
+				      //alert(xmlhttp.responseText)
 				      document.getElementById("row2").innerHTML=xmlhttp.responseText;
 				    }
-				    else{
-				    	alert("ab");
-				    }
+				    
 				  }  
-				  xmlhttp.open("POST","/user/test_for_refresh",true);
-				  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				  xmlhttp.send("name=123456&csrfmiddlewaretoken=9GsU75hBDg0921qwi2Po1mAGXgtELJcpYkzHGkNkGMEcxbAPmJ5B1wkg7KcQb1AN&pwd=aaa");
+				  xmlhttp.open("GET","/user/test_for_refresh",true);
+				  //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				  xmlhttp.send();
 				   
 				}
+				
+				/*function getCookies(strCookie) { 
+						  var arrCookie=strCookie.split("=");
+						  var userId = arrCookie[1]
+						  return(userId);
+				}*/ 
+				
+				/*function submit_object(){
+				  var xmlhttp;
+				  if (window.XMLHttpRequest)
+				  {
+				    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+				    xmlhttp=new XMLHttpRequest();
+				  }
+				  else
+				  {
+				    // IE6, IE5 浏览器执行代码
+				    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				  xmlhttp.onreadystatechange=function()
+				  {
+				  	//alert("a")
+				    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				    {
+				     
+				      if(xmlhttp.responseText=='success'){
+				      	alert("ssss")
+				      }
+				      else{
+//				      	alert('no')
+						alert(xmlhttp.responseText)
+				      }
+				      //document.getElementById("row2").innerHTML=xmlhttp.responseText;
+				    }
+				    else{
+				    	alert("b")
+				    }
+				    
+				  }  
+				  
+				  xmlhttp.open("POST","/user/tmp",true);
+				  xmlhttp.setRequestHeader("Content-type","multipart/form-data; boundary=----WebKitFormBoundaryO1WA76ARvKOGaiuI");
+				  xmlhttp.send("obj_name=123&obj_num=2&desc=2131222");
+				}*/
+				
+				function person(){
+					var xmlhttp;
+				  if (window.XMLHttpRequest)
+				  {
+				    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+				    xmlhttp=new XMLHttpRequest();
+				  }
+				  else
+				  {
+				    // IE6, IE5 浏览器执行代码
+				    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				  xmlhttp.onreadystatechange=function()
+				  {
+				  	//alert(xmlhttp.readyState+','+xmlhttp.status)
+				    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				    {
+				      //alert(xmlhttp.responseText)
+				      document.getElementById("row2").innerHTML=xmlhttp.responseText;
+				    }
+				    
+				  }  
+				  xmlhttp.open("GET","/user/test_for_person",true);
+				  //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				  xmlhttp.send();
+				}
 			
+			    function modify_personal_info(){
+			    	var xmlhttp;
+				  if (window.XMLHttpRequest)
+				  {
+				    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+				    xmlhttp=new XMLHttpRequest();
+				  }
+				  else
+				  {
+				    // IE6, IE5 浏览器执行代码
+				    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				  xmlhttp.onreadystatechange=function()
+				  {
+				  	//alert(xmlhttp.readyState+','+xmlhttp.status)
+				    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				    {
+				      //alert(xmlhttp.responseText)
+				      document.getElementById("row2").innerHTML=xmlhttp.responseText;
+				    }
+				    
+				  }  
+				  xmlhttp.open("GET","/user/test_for_modify",true);
+				  //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				  xmlhttp.send();
+				
+			    }
 		</script>
 		<title></title>
 
@@ -71,7 +168,7 @@
 		</div>
 		<div class="col-md-1 column" id="home">
 			<a href="../admin" class="btn btn-info btn-lg" id="homebutton">
-          	<span class="glyphicon glyphicon-asterisk" style="margin-top: 80%;"></span> 管理
+          	<span class="glyphicon glyphicon-search" style="margin-top: 80%;"></span> 查找
         	</a>
 		</div>
 		
@@ -232,11 +329,99 @@
 		</div-->
 		
 		
-		<div class="col-md-7 column" id="row3">
+		<div class="col-md-7 column" id="row5">
 			<a style="height: 10%;" href="#" class="list-group-item active">
 				快来借共享物品吧！
 			</a>
 			
+			<!--
+            	作者：offline
+            	时间：2017-03-22
+            	描述：
+            
+			{% for obj in obj_list %}
+		    	<input type="radio" name="obj" id="obj{{ forloop.counter }}" value="{{ obj.id }}" />
+		    	<label for="obj{{ forloop.counter }}">{{ obj.name }}</label><br />
+				<img src="../{{ obj.img }}" alt="" height="40" width="40">
+			{% endfor %}
+			-->
+			
+            	
+            {% for obj in obj_list %}
+			<div id="item">
+				
+				<a href="#" class="list-group-item">
+					
+					<div class="col-md-2 column" id="itempic">
+						<img alt="140x140" src="../{{ obj.img }}" class="img-rounded">
+					</div>
+					<div class="col-md-8 column">
+						
+						<p>剩余件数：{{ obj.num }}　　　　物品名称：{{ obj.name }}　　　　<!--用户手机：--></p>
+						<p>物品简介：{{ obj.description }}</p>
+						<p hidden="hidden">{{ obj.id }}　</p>
+						
+					</div>
+		
+					<div class="col-md-2 column">
+						
+						<button style="float: right;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+									我要借用
+								</button>
+								
+								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+													&times;
+												</button>
+												<h3 class="modal-title" id="myModalLabel">
+													订单生成  
+												</h3>
+											</div>
+											<form action="" method="POST">
+												{% csrf_token %}
+											<div class="modal-body" style="height: 120px;">
+												<table width="90%" height="auto" border="0" align="right" cellpadding="0" cellspacing="0">
+												    <tr>
+														<td height="40" colspan="" align="left" valign="top" scope="row"><h4>手机：</h4>
+									    				<td height="45" align="left">
+									    					<input name="" type="text" class="mytextfield" id="" value="" maxlength="11 " />
+														</td> 
+														</td>
+												    </tr>
+												    <tr>
+														<td height="40" colspan="" align="left" valign="top" scope="row"><h4>件数：</h4>
+									    				<td height="45" align="left">
+									    					<input name="" style="width:20%" type="text" class="mytextfield" id="" value="" maxlength="3" />
+														</td> 
+														</td>
+												    </tr>
+																							    
+												</table>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+												</button>
+												<button type="button" class="btn btn-success" type="submit">
+													提交
+												</button>
+											</div>
+											</form>
+										</div>
+									</div>
+								</div>
+						
+						
+						
+					</div>
+						
+				</a>
+			</div>
+			{% endfor %}
+			
+			<!--
 			<div id="item">
 				
 				<a href="#" class="list-group-item">
@@ -446,77 +631,7 @@
 				</a>
 			</div>
 			
-			
-			<div id="item">
-				
-				<a href="#" class="list-group-item">
-					<div class="col-md-2 column" id="itempic">
-						<img alt="140x140" src="{% static 'img/a.jpg' %}" class="img-rounded">
-					</div>
-					<div class="col-md-8 column">
-						
-						<p>剩余件数：2　　　　物品名称：clothes</p>
-						<p>物品简介：Extremely beautiful</p>
-						
-					</div>
-					<div class="col-md-2 column">
-						
-						<button style="float: right;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-									我要借用
-								</button>
-								
-								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-													&times;
-												</button>
-												<h3 class="modal-title" id="myModalLabel">
-													订单生成  
-												</h3>
-											</div>
-											<form action="" method="POST">
-												{% csrf_token %}
-											<div class="modal-body" style="height: 120px;">
-												<table width="90%" height="auto" border="0" align="right" cellpadding="0" cellspacing="0">
-												    <tr>
-														<td height="40" colspan="" align="left" valign="top" scope="row"><h4>手机：</h4>
-									    				<td height="45" align="left">
-									    					<input name="" type="text" class="mytextfield" id="" value="" maxlength="11 " />
-														</td> 
-														</td>
-												    </tr>
-												    <tr>
-														<td height="40" colspan="" align="left" valign="top" scope="row"><h4>件数：</h4>
-									    				<td height="45" align="left">
-									    					<input name="" style="width:20%" type="text" class="mytextfield" id="" value="" maxlength="3" />
-														</td> 
-														</td>
-												    </tr>
-																							    
-												</table>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-												</button>
-												<button type="button" class="btn btn-success" type="submit">
-													提交
-												</button>
-											</div>
-											</form>
-										</div>
-									</div>
-								</div>
-						
-						
-						
-					</div>
-						
-				</a>
-			</div>
-			
-						
+			-->			
 		
 		</div>
 		
