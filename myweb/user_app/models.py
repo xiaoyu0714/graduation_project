@@ -19,7 +19,7 @@ class Object(models.Model):
     name = models.CharField(max_length=10)
     description = models.CharField(max_length=100)
     num = models.IntegerField()
-    img = models.FileField(default='static/img/default.png')
+    img = models.FileField(default='static/img/default.png',upload_to = 'static/img/')
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
 

@@ -11,6 +11,12 @@
 
 <script src="{% static 'js/jquery-1.7.2.min.js' %}" type="text/javascript"></script>
 <script type="text/javascript">
+
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
 $(function() {
 	$('#login').click(function() {
 		var name_state = $('#name');
@@ -25,9 +31,6 @@ $(function() {
 			psd_state.parent().next().next().css("display", "block");
 			return false;
 		} else {
-			// name_state.parent().next().next().css("display", "none");
-			// psd_state.parent().next().next().css("display", "none");
-
 				  var xmlhttp;
 				  if (window.XMLHttpRequest)
 				  {
@@ -41,24 +44,27 @@ $(function() {
 				  }
 				  xmlhttp.onreadystatechange=function()
 				  {
-				  	//alert(xmlhttp.readyState+','+xmlhttp.status)
 				    if (xmlhttp.readyState==4 && xmlhttp.status==200)
 				    {
-				      //alert(xmlhttp.responseText)
 				      if (xmlhttp.responseText == 'login=1'){
-				      	alert('login successfully')
-				      	window.location.href='index';
+						   window.location.href='index';
+						//  xmlhttp.open( "GET", '/user/index', false );
+						//  xmlhttp.send(null);
 				      }
 				      else {
-				      	alert("username or password is incorrect");
+				      	alert("用户名或密码错误。");
 				      }
 
 				    }
 				  }
 				  xmlhttp.open("POST","/user/verify",true);
 				  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				  xmlhttp.send("name=123456&csrfmiddlewaretoken=EXXm0X19lcinCbVOdzU3BUNHCfsP9cCLQF1RyGcdaSLtfP6yxr7ggIZ4JkYT918g&pwd=aaa");
-
+				  name = document.getElementById('name').value
+				  pwd = document.getElementById('psd').value
+				  ss = document.cookie.split('=')
+				  xmlhttp.send(
+					//   "name=123456&csrfmiddlewaretoken=EXXm0X19lcinCbVOdzU3BUNHCfsP9cCLQF1RyGcdaSLtfP6yxr7ggIZ4JkYT918g&pwd=aaa");
+					"name="+name+"&pwd="+pwd+'&csrfmiddlewaretoken='+getCookie('csrftoken'))
 			}
 
 	});

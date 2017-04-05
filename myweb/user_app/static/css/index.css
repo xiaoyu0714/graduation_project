@@ -78,6 +78,10 @@ html,body{height:100%;}
 	background-color: #EDEDED;
 	height: 50%;
 }
+#row4{
+	background-color: #EDEDED;
+	height: 100%;
+}  
 #item{
 	height: 20%;
 }
