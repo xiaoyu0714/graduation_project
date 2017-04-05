@@ -27,7 +27,7 @@ $(function() {
 		} else {
 			// name_state.parent().next().next().css("display", "none");
 			// psd_state.parent().next().next().css("display", "none");
-			
+
 				  var xmlhttp;
 				  if (window.XMLHttpRequest)
 				  {
@@ -52,15 +52,15 @@ $(function() {
 				      else {
 				      	alert("username or password is incorrect");
 				      }
-				      	 
+
 				    }
-				  }  
+				  }
 				  xmlhttp.open("POST","/user/verify",true);
 				  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				  xmlhttp.send("name=123456&csrfmiddlewaretoken=9GsU75hBDg0921qwi2Po1mAGXgtELJcpYkzHGkNkGMEcxbAPmJ5B1wkg7KcQb1AN&pwd=aaa");
-				   
+				  xmlhttp.send("name=123456&csrfmiddlewaretoken=EXXm0X19lcinCbVOdzU3BUNHCfsP9cCLQF1RyGcdaSLtfP6yxr7ggIZ4JkYT918g&pwd=aaa");
+
 			}
-				
+
 	});
 	$('#register').click(function() {
 		var name_r_state = $('#name_r');
@@ -150,7 +150,7 @@ function barter_btn(bb) {
 	<div class="col-xs-12 login_title">登录</div>
 
 	<!--form action="" class="login" method="POST"-->
-		
+
 		<div class="nav">
 			<div class="nav login_nav">
 				<div class="col-xs-4 login_username">

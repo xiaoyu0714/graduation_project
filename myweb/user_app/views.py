@@ -19,10 +19,8 @@ def userdata(request):
 	template = loader.get_template('index.html')
 	return HttpResponse(template.render(context, request))
 
-
 def index(request):
 	return userdata(request)
-
 
 def login(request):
     return render(request,'login.html')
@@ -46,7 +44,6 @@ def register(request):
 	user.save()
 	return render(request,'login.html')
 
-
 def modify_personalinfo(request):
 	return render(request,'modify_personalinfo.html')
 
@@ -62,6 +59,30 @@ def modify(request):
 	request.session['user'] = serializers.serialize('json',User.objects.all().filter(pk=user.pk))
 	template = loader.get_template('index.html')
 	return HttpResponse(template.render(context, request))
+
+# 提交订单
+def order_submit(request):
+	if request.method != 'POST':
+		return HttpResponse(status=404)
+
+	# 商品 id
+	obj_id = request.POST('id',None)
+	# 借出商品数
+	order_num = request.POST.get('num',None)
+	if not obj_id or not order_num:
+		return HttpResponse(status=404)
+
+	# 获取objects id,
+	obj = Object.objects.all().filter(pk=obj_id)
+	if not obj:
+		return HttpResponse(status=404)
+	else:
+		if obj.num < int(order_num):
+			return HttpResponse('所借商品数超出库存')
+		else:
+			obj.num -= int(order_num)
+			obj.save()
+			return HttpResponse('成功借出。')
 
 def logout(request):
 	request.session['user'] = None
@@ -80,13 +101,12 @@ def test(request):
 						 img=request.FILES['file'],
 						 user=get_session_user(request))
 			obj.save()
-			
+
 		return render(request,'test.html')
 	else:
 		form = UploadFileForm()
 
 	return render(request,'test.html',{'form':form})
-
 
 def tmp(request):
 	if request.method == 'POST':
