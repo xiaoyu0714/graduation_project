@@ -4,19 +4,18 @@
 		<div class="row clearfix" id="row2">
 		<div class="col-md-2 column"></div>
 		<div class="col-md-3 column" style="background-color:;height: 100%;">
+			{% if user %}
 			<div class="headportrait" style="">
-				<img src="{% static 'img/headportrait.jpg' %}" class="img-rounded" style="height:95%;width:90%;margin-left:10%;margin-top:3% ;">
+				<img src="/{{ user.head_pic }}" class="img-rounded" style="height:95%;width:90%;margin-left:10%;margin-top:3% ;">
 			</div>
 			<div class="per_info" style="">
-				{% if user %}
 				    <ul>
-				    <p>用户名：xiaoyu{{ user.nickname }}</p>
-				    <p>学院：cisco{{ user.school }}</p>
-				    <p>简介：handsomeboy{{ user.personal_intro }}</p>
+				    <p>用户名：{{ user.nickname }}</p>
+				    <p>学院：{{ user.school }}</p>
+				    <p>简介：{{ user.personal_intro }}</p>
 				    </ul>
 				{% endif %}
-
-				<a onclick="modify_personal_info()" style="color: black;float: right;">信息不对？</a>
+				<a onclick="asy_resp('/user/person_info_modify')" style="color: black;float: right;">信息不对？</a>
 			</div>
 		</div>
 		<div class="col-md-4 column" style="background-color:;height: 100%;">
@@ -37,24 +36,17 @@
 						<p>Info here</p>
 					</div>
 					<div class="col-md-1 column">
-
 						<button style="float: right;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-									取消
-								</button>
+							取消
+						</button>
 					</div>
 					<div class="col-md-2 column">
-
 						<button style="float: right;" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
-									更改
-								</button>
+							更改
+						</button>
 					</div>
-
 				</a>
 				</div>
-
-
-
-
 			</div>
 		</div>
 		<div class="col-md-3 column"></div>
@@ -63,48 +55,38 @@
 	<div class="row clearfix" id="row3">
 		<div class="col-md-2 column"></div>
 		<div class="col-md-7 column">
-
 			<div class="myshare">
-
 			<a style="height: 10%;" href="#" class="list-group-item active">
 				我分享的物品：
-				{% for obj in my_share %}
 					<div class="col-md-2 column" id="itempic">
-						<img alt="140x140" src="../{{ obj.img }}" class="img-rounded">
+						<img alt="140x140" src="" class="img-rounded">
 					</div>
 					<div class="col-md-8 column">
-						<p>剩余件数：{{ obj.num }}　　　　物品名称：{{ obj.name }}</p>
-						<p>物品简介：{{ obj.description }}</p>
-						<p hidden="hidden">{{ obj.id }}　</p>
+						<p>剩余件数：　　　　物品名称：</p>
+						<p>物品简介：</p>
 					</div>
-				{% endfor %}
 			</a>
 
-
+			{% for obj in my_share %}
 			<div id="item">
-
 				<a href="#" class="list-group-item">
+					<p hidden="hidden">{{ obj.id }}　</p>
 					<div class="col-md-2 column" id="itempic">
-						<img alt="140x140" src="../../static/img/0aca7bace13c44368bca3a372285a632.temp.jpg" class="img-rounded">
+						<img alt="140x140" src="/{{ obj.img }}" class="img-rounded">
 					</div>
 					<div class="col-md-7 column">
-
 						<p>Info Here</p>
 					</div>
 					<div class="col-md-1 column">
-
 						<button style="float: right;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-									取消
-								</button>
-
+							取消
+						</button>
 					</div>
 					<div class="col-md-2 column">
-
 						<button style="float: right;" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
-									更改信息
-								</button>
-
-								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							更改信息
+						</button>
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -150,6 +132,7 @@
 					</div>
 				</a>
 			</div>
+			{% endfor %}
 			</div>
 		</div>
 		<div class="col-md-3 column"></div>

@@ -6,59 +6,47 @@
 			<div class="row clearfix">
 			<div class="col-md-2 column"></div>
 			<div class="col-md-9 column">
-			<form action="tmp"  method="POST" enctype="multipart/form-data">
-
-			<table  width="90%" height="auto" border="0" align="right" cellpadding="0" cellspacing="0">
-			    <tr>
-					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">物品名称：</h4>
-    				<td height="45" align="left">
-    					<input name="obj_name" type="text" class="mytextfield" id="" value="" maxlength="10" />
-					</td>
-					</td>
-			    </tr>
-			    <tr>
-					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">件数：</h4>
-    				<td height="45" align="left">
-    					<input name="obj_num" style="width:20%" type="text" class="mytextfield" id="" value="" maxlength="3" />
-					</td>
-					</td>
-			    </tr>
-			    <tr>
-					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">图片：</h4>
-    				<td height="" align="left">
-    					<input style="color: ;" name="file" type="file" class="myfile" />
-					</td>
-					</td>
-			    </tr>
-			    <tr>
-			    	<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">物品简介：</h4>
-			    	<td  height="150" colspan="3" valign="middle" scope="row">
-			    		<textarea style="margin-top: 10px;width: 80%;" name="desc" cols="25" rows="10" class="mytextarea" id="plan_c" style="color:#999" onfocus="if(this.value=='请描述一下你的物品…') this.value='';" onblur="if(this.value=='')this.value='请描述一下你的物品…';">请描述一下你的物品…
-			    		</textarea>
-			    	</td>
-
-			    </tr>
-			    <tr>
-			    	<td></td>
-			    	<td><input style="margin-left: 30px;" type="submit" class="btn btn-primary" value="提交" /></td>
-
-				</tr>
-			</table>
+			<form action="object_upload"  method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<table  width="90%" height="auto" border="0" align="right" cellpadding="0" cellspacing="0">
+				    <tr>
+						<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">物品名称：</h4>
+						<td height="45" align="left">
+							<input name="obj_name" type="text" class="mytextfield" id="" value="" maxlength="10" />
+						</td>
+						</td>
+				    </tr>
+				    <tr>
+						<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">件数：</h4>
+						<td height="45" align="left">
+							<input name="obj_num" style="width:20%" type="text" class="mytextfield" id="" value="" maxlength="3" />
+						</td>
+						</td>
+				    </tr>
+				    <tr>
+						<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">图片：</h4>
+						<td height="" align="left">
+							<input style="color: ;" name="file" type="file" class="myfile" />
+						</td>
+						</td>
+				    </tr>
+				    <tr>
+				    	<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">物品简介：</h4>
+				    	<td  height="150" colspan="3" valign="middle" scope="row">
+				    		<textarea style="margin-top: 10px;width: 80%;" name="desc" cols="25" rows="10" class="mytextarea" id="plan_c" style="color:#999" onfocus="if(this.value=='请描述一下你的物品…') this.value='';" onblur="if(this.value=='')this.value='请描述一下你的物品…';">请描述一下你的物品…
+				    		</textarea>
+				    	</td>
+				    </tr>
+				    <tr>
+				    	<td></td>
+				    	<td><input style="margin-left: 30px;" type="submit" class="btn btn-primary" value="提交" /></td>
+					</tr>
+				</table>
 			</form>
-
 			</div>
-			<div class="col-md-1 column"></div>
-			</div>
+			<div class="col-md-1 column"></div></div>
 			<br>
-			<div class="row clearfix">
-			</div>
-			<!--form action="tmp" method="post" enctype="multipart/form-data">
-
-				<input type="file" name="img" id="img" value="File" />
-				<input type="submit" value="Submit"/>
-
-			</form-->
-
+			<div class="row clearfix"></div>
 		</div>
 		<div class="col-md-2 column"></div>
 	</body>

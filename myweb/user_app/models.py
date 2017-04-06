@@ -9,7 +9,7 @@ class User(models.Model):
     pwd = models.CharField(max_length=10)
     nickname = models.CharField(max_length=10,null=True)
     phone = models.CharField(max_length=10,null=True)
-    # file = models.FileField(upload_to='./upload',null=True)
+    head_pic = models.FileField(default='/static/img/default.png',upload_to = 'static/img/')
     school = models.CharField(max_length=10,null=True)
     personal_intro = models.CharField(max_length=20,null=True)
 
@@ -19,9 +19,8 @@ class Object(models.Model):
     name = models.CharField(max_length=10)
     description = models.CharField(max_length=100)
     num = models.IntegerField()
-    img = models.FileField(default='static/img/default.png',upload_to = 'static/img/')
+    img = models.FileField(default='/static/img/default.png',upload_to = 'static/img/')
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
-
 
 class Order(models.Model):
 
@@ -30,3 +29,5 @@ class Order(models.Model):
     object = models.ForeignKey(Object)
     num = models.IntegerField()
     borrow_date = models.DateField(auto_now_add=True)
+    # 订单状态:active、closed.
+    status = models.CharField(max_length=3,default='active')

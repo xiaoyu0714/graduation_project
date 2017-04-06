@@ -11,15 +11,15 @@
 		<title></title>
 	</head>
 	<body>
-		
+
 	<div class="container-fluid">
 	<div class="row clearfix" id="row1">
-		<div class="col-md-2 column">  
+		<div class="col-md-2 column">
 		</div>
 		<div class="col-md-2 column" style="height: 100%;">
 			<img alt="90x90" src="{% static 'img/shared.jpg' %}" class="img-circle" style="height: 80%;margin-top:5%;margin-left: 5%;">
 		</div>
-		
+
 		<div class="col-md-1 column" id="home" style="height: 100%;">
 			<a href="index" class="btn btn-info btn-lg" id="homebutton">
           	<span class="glyphicon glyphicon-home" style="margin-top: 80%;"></span> 首页
@@ -40,20 +40,20 @@
           	<span class="glyphicon glyphicon-asterisk" style="margin-top: 80%;"></span> 管理
         	</a>
 		</div>
-		
+
 		<div class="col-md-2 column" style="color: white;" id="greeting">
 			{% if user %}
-				   
+
 				<p>{{ user.nickname }},你好|<a href="/user/logout" style="color: white;">退出</a></p>
-			
+
 			{% else %}
 				<p>你好|<a href="/user/logout" style="color: white;">退出</a></p>
-			
+
 			{% endif %}
-			
+
 		</div>
-		
-		
+
+
 		<div class="col-md-2 column"></div>
 	</div>
 
@@ -64,39 +64,39 @@
 			<div class="col-md-2 column"></div>
 			<div class="col-md-9 column">
 			<form action="share" class="personalinfomation" method="POST">
-			{% csrf_token %} 
+			{% csrf_token %}
 			<table  width="90%" height="auto" border="0" align="right" cellpadding="0" cellspacing="0">
 			    <tr>
 					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">物品名称：</h4>
     				<td height="45" align="left">
     					<input name="objectname" type="text" class="mytextfield" id="" value="" maxlength="10" />
-					</td> 
+					</td>
 					</td>
 			    </tr>
 			    <tr>
 					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">件数：</h4>
     				<td height="45" align="left">
     					<input name="objectnum" style="width:20%" type="text" class="mytextfield" id="" value="" maxlength="3" />
-					</td> 
+					</td>
 					</td>
 			    </tr>
 			    <tr>
 					<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">图片：</h4>
     				<td height="" align="left">
     					<input style="color: ;" name="file" type="file" class="myfile" />
-					</td> 
+					</td>
 					</td>
 			    </tr>
-			    <tr> 
+			    <tr>
 			    	<td height="40" colspan="" align="left" valign="top" scope="row"><h4 style="color: ;">物品简介：</h4>
 			    	<td  height="150" colspan="3" valign="middle" scope="row">
 			    		<textarea style="margin-top: 10px;width: 80%;" name="textarea" cols="25" rows="10" class="mytextarea" id="plan_c" style="color:#999" onfocus="if(this.value=='请描述一下你的物品…') this.value='';" onblur="if(this.value=='')this.value='请描述一下你的物品…';">请描述一下你的物品…
 			    		</textarea>
 			    	</td>
-			    	
+
 			    </tr>
 			</table>
-			
+
 			</div>
 			<div class="col-md-1 column"></div>
 			</div>
@@ -104,25 +104,13 @@
 			<div class="row clearfix">
 				<input style="margin-left: 45%;" type="submit" class="btn btn-primary" value="提交" id="login" />
 			</div>
-			
+
 		</div>
 		</form>
 		<div class="col-md-2 column"></div>
-	</div>               
-	
-	<!--div class="row-fluid" id="row3">
-		<div class="span2"></div>
-		<div class="span4">
-			<img alt="140x140" src="img/a.jpg" class="img-circle" />
-		</div>
-		<div class="span4">
-			<img alt="140x140" src="img/a.jpg" />
-		</div>
-		<div class="span2"></div>
-	</div-->
+	</div>
 </div>
 		<script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
       	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 	</body>
-</html>   
-   
+</html>

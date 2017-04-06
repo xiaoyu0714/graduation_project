@@ -8,7 +8,8 @@
 		<link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
 		<link href="{% static 'css/index.css' %}" rel="stylesheet">
 		<link href="{% static 'css/things.css' %}" rel="stylesheet">
-
+		<script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
+		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 <script type="text/javascript">
 	function getxmlhttp(){
 		var xmlhttp;
@@ -25,7 +26,6 @@
 		return xmlhttp;
 	}
 
-	// "/user/test_for_refresh","/user/test_for_person","/user/test_for_modify"
 	function asy_resp(url){
 		xmlhttp = getxmlhttp();
 		xmlhttp.onreadystatechange=function(){
@@ -43,120 +43,110 @@
 	</head>
 	<body>
 
-	<div class="container-fluid">
-	<div class="row clearfix" id="row1">
-		<div class="col-md-2 column">
+		<div class="container-fluid">
+		<div class="row clearfix" id="row1">
+			<div class="col-md-2 column"></div>
+			<div class="col-md-2 column" style="height: 100%;">
+				<img alt="90x90" src="{% static 'img/shared.jpg' %}" class="img-circle" style="height: 80%;margin-top:5%;margin-left: 5%;">
+			</div>
+
+			<div class="col-md-1 column" id="home" style="height: 100%;">
+				<a href="index" class="btn btn-info btn-lg" id="homebutton">
+	          		<span class="glyphicon glyphicon-home" style="margin-top: 80%;"></span> 首页
+	        	</a>
+			</div>
+			<div class="col-md-1 column" id="home">
+				<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/object_upload')">
+	          		<span class="glyphicon glyphicon-send" style="margin-top: 80%;"></span> 分享
+	        	</a>
+			</div>
+			<div class="col-md-1 column" id="home">
+				<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/person_info')">
+	          		<span class="glyphicon glyphicon-user" style="margin-top: 80%;"></span> 用户
+	        	</a>
+			</div>
+			<div class="col-md-1 column" id="home">
+				<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/search')">
+	          		<span class="glyphicon glyphicon-search" style="margin-top: 80%;"></span> 查找
+	        	</a>
+			</div>
+
+			<div class="col-md-2 column" style="color: white;" id="greeting">
+				{% if user %}
+					<p>{{ user.nickname }},你好|<a href="/user/logout" style="color: white;">退出</a></p>
+				{% else %}
+					<p>你好|<a href="/user/logout" style="color: white;">退出</a></p>
+				{% endif %}
+			</div>
+			<div class="col-md-2 column"></div>
 		</div>
-		<div class="col-md-2 column" style="height: 100%;">
-			<img alt="90x90" src="{% static 'img/shared.jpg' %}" class="img-circle" style="height: 80%;margin-top:5%;margin-left: 5%;">
-		</div>
+		<div class="row clearfix" id="row2">
+			<div class="col-md-2 column"></div>
+			<div class="col-md-7 column" id="row5">
+				<a style="height: 10%;" href="#" class="list-group-item active">
+					快来借共享物品吧！
+				</a>
+	            {% for obj in obj_list %}
+				<div id="item">
+					<a href="#" class="list-group-item">
+						<div class="col-md-2 column" id="itempic">
+							<img alt="140x140" src="/{{ obj.img }}" class="img-rounded">
+						</div>
 
-		<div class="col-md-1 column" id="home" style="height: 100%;">
-			<a href="index" class="btn btn-info btn-lg" id="homebutton">
-          	<span class="glyphicon glyphicon-home" style="margin-top: 80%;"></span> 首页
-        	</a>
-		</div>
-		<div class="col-md-1 column" id="home">
-			<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/test_for_refresh')">
-          	<span class="glyphicon glyphicon-send" style="margin-top: 80%;"></span> 分享
-        	</a>
-		</div>
-		<div class="col-md-1 column" id="home">
-			<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/test_for_person')">
-          	<span class="glyphicon glyphicon-user" style="margin-top: 80%;"></span> 用户
-        	</a>
-		</div>
-		<div class="col-md-1 column" id="home">
-			<!-- <a href="../admin" class="btn btn-info btn-lg" id="homebutton"> -->
-			<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/search')">
-          	<span class="glyphicon glyphicon-search" style="margin-top: 80%;"></span> 查找
-        	</a>
-		</div>
+						<div class="col-md-8 column">
+							<p>剩余件数：{{ obj.num }}　　　　物品名称：{{ obj.name }}</p>
+							<p>物品简介：{{ obj.description }}</p>
+							<p hidden="hidden">{{ obj.id }}　</p>
+						</div>
 
-		<div class="col-md-2 column" style="color: white;" id="greeting">
-			{% if user %}
+						<div class="col-md-2 column">
+							<button style="float: right;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+								我要借用
+							</button>
 
-				<p>{{ user.nickname }},你好|<a href="/user/logout" style="color: white;">退出</a></p>
+							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+												&times;
+											</button>
+											<h3 class="modal-title" id="myModalLabel">
+												订单生成
+											</h3>
+										</div>
+										<form action="/user/order_submit" method="POST">
+											{% csrf_token %}
+											<div class="modal-body" style="height: 120px;">
+												<table width="90%" height="auto" border="0" align="right" cellpadding="0" cellspacing="0">
 
-			{% else %}
-				<p>你好|<a href="/user/logout" style="color: white;">退出</a></p>
+												    <tr>
+														<td height="40" colspan="" align="left" valign="top" scope="row"><h4>件数：</h4>
+									    				<td height="45" align="left">
+									    					<input name="" style="width:20%" type="text" class="mytextfield" id="" value="" maxlength="3" />
+														</td>
+														</td>
+												    </tr>
 
-			{% endif %}
-		</div>
-		<div class="col-md-2 column"></div>
-	</div>
-
-	<div class="row clearfix" id="row2">
-		<div class="col-md-2 column"></div>
-
-		<div class="col-md-7 column" id="row5">
-			<a style="height: 10%;" href="#" class="list-group-item active">
-				快来借共享物品吧！
-			</a>
-
-            {% for obj in obj_list %}
-			<div id="item">
-				<a href="#" class="list-group-item">
-					<div class="col-md-2 column" id="itempic">
-						<img alt="140x140" src="../{{ obj.img }}" class="img-rounded">
-					</div>
-
-					<div class="col-md-8 column">
-						<p>剩余件数：{{ obj.num }}　　　　物品名称：{{ obj.name }}</p>
-						<p>物品简介：{{ obj.description }}</p>
-						<p hidden="hidden">{{ obj.id }}　</p>
-					</div>
-
-					<div class="col-md-2 column">
-						<button style="float: right;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-							我要借用
-						</button>
-
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-											&times;
-										</button>
-										<h3 class="modal-title" id="myModalLabel">
-											订单生成
-										</h3>
+												</table>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+												<button type="button" class="btn btn-success" type="submit">提交</button>
+											</div>
+										</form>
 									</div>
-									<form action="/user/order_submit" method="POST">
-										{% csrf_token %}
-									<div class="modal-body" style="height: 120px;">
-										<table width="90%" height="auto" border="0" align="right" cellpadding="0" cellspacing="0">
-
-										    <tr>
-												<td height="40" colspan="" align="left" valign="top" scope="row"><h4>件数：</h4>
-							    				<td height="45" align="left">
-							    					<input name="" style="width:20%" type="text" class="mytextfield" id="" value="" maxlength="3" />
-												</td>
-												</td>
-										    </tr>
-
-										</table>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-										<button type="button" class="btn btn-success" type="submit">提交</button>
-									</div>
-									</form>
 								</div>
 							</div>
 						</div>
-					</div>
-				</a>
+					</a>
+				</div>
+				{% endfor %}
+
 			</div>
-			{% endfor %}
 
+			<div class="col-md-3 column"></div>
 		</div>
-
-		<div class="col-md-3 column"></div>
 	</div>
-</div>
-		<script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
-      	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 	</body>
 </html>
