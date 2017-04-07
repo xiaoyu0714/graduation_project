@@ -59,12 +59,9 @@ $(function() {
 				  }
 				  xmlhttp.open("POST","/user/verify",true);
 				  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				  name = document.getElementById('name').value
-				  pwd = document.getElementById('psd').value
-				  ss = document.cookie.split('=')
-				  xmlhttp.send(
-					//   "name=123456&csrfmiddlewaretoken=EXXm0X19lcinCbVOdzU3BUNHCfsP9cCLQF1RyGcdaSLtfP6yxr7ggIZ4JkYT918g&pwd=aaa");
-					"name="+name+"&pwd="+pwd+'&csrfmiddlewaretoken='+getCookie('csrftoken'))
+				  name = document.getElementById('name').value;
+				  pwd = document.getElementById('psd').value;
+				  xmlhttp.send("name="+name+"&pwd="+pwd+'&csrfmiddlewaretoken='+getCookie('csrftoken'));
 			}
 
 	});

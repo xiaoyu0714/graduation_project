@@ -4,7 +4,7 @@ from django.core import serializers
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import User,Object
+from .models import User,Object,Order
 from .forms import UploadFileForm,UserForm
 from .utils import handle_uploaded_file
 # Create your views here.
@@ -16,7 +16,8 @@ def user_to_json(user):
 	return serializers.serialize('json',user)
 
 def userdata(request):
-	obj_list = Object.objects.all()[:5]
+	# 过滤user自身的物品
+	obj_list = Object.objects.exclude(num=0).exclude(user=get_session_user(request))[:5]
 	context = {'user':get_session_user(request),'obj_list':obj_list}
 	template = loader.get_template('index.html')
 	return HttpResponse(template.render(context, request))
@@ -64,7 +65,8 @@ def object_upload(request):
 
 def person_info(request):
 	my_share = Object.objects.all().filter(user=get_session_user(request))
-	context = {'my_share':my_share}
+	orders = Order.objects.filter(user=get_session_user(request)).exclude(status='closed')[:5]
+	context = {'my_share':my_share,'orders':orders}
 	context['user'] = get_session_user(request)
 	return render(request,'person_info.html',context)
 
@@ -77,33 +79,45 @@ def person_info_modify(request):
 		form.save()
 	else:
 		return HttpResponse(form.errors)
-	user = User.objects.filter(pk=user.pk)
+	user = User.objects.get(pk=user.pk)
 	request.session['user'] = user_to_json(user)
 	return index(request)
 
 # 提交订单
 def order_submit(request):
-	if request.method != 'POST':
-		return HttpResponse(status=404)
-		print(request.POST)
+	if request.method == 'POST':
 		# 商品 id
-		obj_id = request.POST('id',None)
+		obj_id = request.POST.get('id',None)
 		# 借出商品数
 		order_num = request.POST.get('num',None)
 		if not obj_id or not order_num:
-			return HttpResponse(status=404)
-
-			# 获取objects id,
-			obj = Object.objects.all().filter(pk=obj_id)
-			if not obj:
-				return HttpResponse(status=404)
+			return HttpResponse('表单信息欠缺！',status=404)
+		# 获取objects id,
+		obj = Object.objects.get(pk=obj_id)
+		if not obj:
+			return HttpResponse('非法的物品Id！',status=404)
+		else:
+			if obj.num < int(order_num):
+				return HttpResponse('所借商品数超出库存',status=404)
 			else:
-				if obj.num < int(order_num):
-					return HttpResponse('所借商品数超出库存')
-				else:
-					obj.num -= int(order_num)
-					obj.save()
-					return HttpResponse('成功借出。')
-# 物品搜索
+				obj.num -= int(order_num)
+				obj.save()
+				order = Order(user=get_session_user(request),num=order_num,object=obj)
+				order.save()
+				return HttpResponse('成功借出。')
+
 def search(request):
+	# 物品搜索
 	return render(request,'search.html')
+
+def order_cancel(request):
+	# 取消订单
+	if request.method == 'POST':
+		# order_id
+		order = Order.objects.get(pk=request.POST['order_id'])
+		object = order.object
+		object.num += order.num
+		order.status = 'closed'
+		order.save()
+		object.save()
+		return HttpResponse('订单已取消！')
