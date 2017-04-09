@@ -26,7 +26,7 @@ def index(request):
 	return userdata(request)
 
 def login(request):
-	if request.session['user']:
+	if request.session.get('user',None):
 		return index(request)
 	return render(request,'login.html')
 
@@ -121,3 +121,11 @@ def order_cancel(request):
 		order.save()
 		object.save()
 		return HttpResponse('订单已取消！')
+
+def borrowthings(request):
+	obj_list = Object.objects.exclude(num=0).exclude(user=get_session_user(request))[:5]
+	context = {'user':get_session_user(request),'obj_list':obj_list}
+	template = loader.get_template('borrowthings.html')
+	return HttpResponse(template.render(context, request))
+
+

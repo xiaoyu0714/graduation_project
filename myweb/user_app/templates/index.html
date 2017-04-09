@@ -38,7 +38,8 @@
 	}
 
 	function order_submit_asyn(ele){
-		xmlhttp = getxmlhttp();
+		document.getElementById("myModal").setAttribute('data-dismiss','modal');
+		/*xmlhttp = getxmlhttp();
 		xmlhttp.onreadystatechange==function(){
 	    	if (xmlhttp.readyState==4){
 				if(xmlhttp.status==200){
@@ -52,6 +53,7 @@
 		xmlhttp.open('POST','/user/order_submit',true);
 		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		xmlhttp.send('id='+ele.id+'&num='+document.getElementById('num_input').value+'&csrfmiddlewaretoken='+'{{ csrf_token }}');
+		*/
 	}
 </script>
 		<title>主页</title>
@@ -66,8 +68,8 @@
 				<img alt="90x90" src="{% static 'img/shared.jpg' %}" class="img-circle" style="height: 80%;margin-top:5%;margin-left: 5%;">
 			</div>
 
-			<div class="col-md-1 column" id="home" style="height: 100%;">
-				<a href="index" class="btn btn-info btn-lg" id="homebutton">
+			<div class="col-md-1 column" id="home" style="height: 100%;" >
+				<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/borrowthings')">
 	          		<span class="glyphicon glyphicon-home" style="margin-top: 80%;"></span> 首页
 	        	</a>
 			</div>
