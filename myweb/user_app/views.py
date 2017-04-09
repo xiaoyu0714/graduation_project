@@ -17,7 +17,8 @@ def user_to_json(user):
 	return serializers.serialize('json',user)
 
 def index(request):
-	return render(request,'index.html')
+	user = get_session_user(request)
+	return render(request,'index.html',{'user':user})
 
 def login(request):
 	if request.session.get('user',None):
