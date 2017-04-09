@@ -6,7 +6,7 @@
 		<div class="col-md-3 column" style="background-color:;height: 100%;">
 			{% if user %}
 			<div class="headportrait" style="">
-				<img src="/{{ user.head_pic }}" class="img-rounded" style="height:95%;width:90%;margin-left:10%;margin-top:3% ;">
+				<img src="/{{ user.head_pic }}" class="img-rounded" style="height:95%;width:90%;margin-left:5%;margin-top:2% ;">
 			</div>
 			<div class="per_info" style="">
 				    <ul>
@@ -19,7 +19,6 @@
 			</div>
 		</div>
 		<div class="col-md-4 column" style="background-color:;height: 100%;">
-
 			<div class="orderlist" style="height: 86%;margin-top:;">
 				<a style="height: 10%;" href="#" class="list-group-item active">
 					你正在使用的共享物品：
@@ -34,14 +33,14 @@
 						<p>{{ order.object.description }}</p>
 					</div>
 					<div class="col-md-1 column">
-						<button style="float: right;" id="{{ order.id }}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+						<button style="float: right;" id="cancel{{ order.id }}" onclick="order_cancel(this)" class="btn btn-primary btn-sm">
 							取消
 						</button>
 					</div>
 					<div class="col-md-2 column">
-						<button style="float: right;" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
+						<!-- <button style="float: right;" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
 							更改
-						</button>
+						</button> -->
 					</div>
 				</a>
 				</div>
@@ -57,13 +56,6 @@
 			<div class="myshare">
 			<a style="height: 10%;" href="#" class="list-group-item active">
 				我分享的物品：
-					<div class="col-md-2 column" id="itempic">
-						<img alt="140x140" src="" class="img-rounded">
-					</div>
-					<div class="col-md-8 column">
-						<p>剩余件数：　　　　物品名称：</p>
-						<p>物品简介：</p>
-					</div>
 			</a>
 
 			{% for obj in my_share %}
@@ -77,14 +69,14 @@
 						<p>Info Here</p>
 					</div>
 					<div class="col-md-1 column">
-						<button style="float: right;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+						<button id="revoke{{ obj.id }}" onclick="object_revoke(this)" style="float: right;" class="btn btn-primary btn-sm">
 							取消
 						</button>
 					</div>
 					<div class="col-md-2 column">
-						<button style="float: right;" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
+						<!-- <button style="float: right;" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
 							更改信息
-						</button>
+						</button> -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">

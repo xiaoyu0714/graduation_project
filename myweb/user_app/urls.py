@@ -12,5 +12,8 @@ urlpatterns = [
     url(r'^logout$',views.logout,name='logout'),
     url(r'^person_info_modify$',views.person_info_modify,name='person_info_modify'),
     url(r'^order_submit$',views.order_submit,name='order_submit'),
-    url(r'^search$',views.search,name='search')
+    url(r'^search$',views.search,name='search'),
+    url(r'^borrow_things$',views.borrow_things,name='borrow_things'),
+    url(r'^object_revoke$',views.object_revoke,name='object_revoke'),
+    url(r'^order_cancel$',views.order_cancel,name='order_cancel'),
 ]
