@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
 from django.template import loader
-from django.views.decorators.csrf import csrf_exempt
 
 from .models import User,Object,Order
 from .forms import UploadFileForm,UserForm

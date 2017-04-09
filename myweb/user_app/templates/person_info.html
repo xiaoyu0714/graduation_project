@@ -14,7 +14,7 @@
 				    <p>学院：{{ user.school }}</p>
 				    <p>简介：{{ user.personal_intro }}</p>
 				    </ul>
-				{% endif %}
+			{% endif %}
 				<a onclick="asy_resp('/user/person_info_modify')" style="color: black;float: right;">信息不对？</a>
 			</div>
 		</div>
@@ -34,7 +34,7 @@
 						<p>{{ order.object.description }}</p>
 					</div>
 					<div class="col-md-1 column">
-						<button style="float: right;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+						<button style="float: right;" id="{{ order.id }}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
 							取消
 						</button>
 					</div>
