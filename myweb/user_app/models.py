@@ -8,7 +8,7 @@ class User(models.Model):
     name = models.CharField(max_length=10)
     pwd = models.CharField(max_length=10)
     nickname = models.CharField(max_length=10,null=True)
-    phone = models.CharField(max_length=10,null=True)
+    phone = models.CharField(max_length=15,null=True)
     head_pic = models.FileField(default='static/img/default.png',upload_to = 'static/img/')
     school = models.CharField(max_length=10,null=True)
     personal_intro = models.CharField(max_length=20,null=True)

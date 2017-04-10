@@ -27,11 +27,11 @@
 		return xmlhttp;
 	}
 
-	function asy_resp(url){
+	function asy_resp(url,target_id){
 		xmlhttp = getxmlhttp();
 		xmlhttp.onreadystatechange=function(){
 	    	if (xmlhttp.readyState==4 && xmlhttp.status==200){
-	      		document.getElementById("row2").innerHTML=xmlhttp.responseText;
+	      		document.getElementById(target_id).innerHTML=xmlhttp.responseText;
 	    	}
 	  	}
 	  	xmlhttp.open("GET",url,true);
@@ -45,7 +45,7 @@
 		xmlhttp.onreadystatechange=function(){
 	    	if (xmlhttp.readyState==4 && xmlhttp.status==200){
 				alert(xmlhttp.responseText);
-				asy_resp('/user/borrow_things');
+				asy_resp('/user/borrow_things','row2');
 			}
 
 	  	}
@@ -62,7 +62,7 @@
 		xmlhttp.onreadystatechange=function(){
 	    	if (xmlhttp.readyState==4 && xmlhttp.status==200){
 				alert(xmlhttp.responseText);
-				asy_resp('/user/person_info');
+				asy_resp('/user/person_info','row2');
 			}
 	  	}
 		xmlhttp.open('POST','/user/object_revoke',true);
@@ -76,7 +76,7 @@
 		xmlhttp.onreadystatechange=function(){
 	    	if (xmlhttp.readyState==4 && xmlhttp.status==200){
 				alert(xmlhttp.responseText);
-				asy_resp('/user/person_info');
+				asy_resp('/user/person_info','row2');
 			}
 	  	}
 		xmlhttp.open('POST','/user/order_cancel',true);
@@ -91,16 +91,45 @@
 		xmlhttp.onreadystatechange=function(){
 	    	if (xmlhttp.readyState==4 && xmlhttp.status==200){
 				alert(xmlhttp.responseText);
-				asy_resp('/user/borrow_things');
+				asy_resp('/user/object_upload','row2');
 			}
 	  	}
         xmlhttp.open("post", "/user/object_upload", true);
        	xmlhttp.send(form);
 	}
 
+	function person_info_modify(){
+		form = new FormData(document.getElementById('person_info_form'));
+		form.append('csrfmiddlewaretoken','{{ csrf_token }}');
+		xmlhttp = getxmlhttp();
+		xmlhttp.onreadystatechange=function(){
+	    	if (xmlhttp.readyState==4 && xmlhttp.status==200){
+				alert(xmlhttp.responseText);
+				window.location.href = '/user/index';
+			}
+	  	}
+        xmlhttp.open("post", "/user/person_info_modify", true);
+       	xmlhttp.send(form);
+	}
+
+	function search(){
+		keyword = document.getElementById('keyword').value;
+		if(keyword.split(' ').join('').length == 0){
+			// do nothing.
+		}
+		xmlhttp = getxmlhttp();
+		xmlhttp.onreadystatechange=function(){
+	    	if (xmlhttp.readyState==4 && xmlhttp.status==200){
+				document.getElementById('row2').innerHTML = xmlhttp.responseText;
+			}
+	  	}
+        xmlhttp.open("GET", "/user/search?keyword="+keyword, true);
+       	xmlhttp.send(null);
+	}
+
 	window.onload = function(){
 		// load borrow_things.html
-		asy_resp('/user/borrow_things');
+		asy_resp('/user/borrow_things','row2');
 	}
 </script>
 		<title>主页</title>
@@ -116,22 +145,22 @@
 			</div>
 
 			<div class="col-md-1 column" id="home" style="height: 100%;" >
-				<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/borrow_things')">
+				<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/borrow_things','row2')">
 	          		<span class="glyphicon glyphicon-home" style="margin-top: 80%;"></span> 首页
 	        	</a>
 			</div>
 			<div class="col-md-1 column" id="home">
-				<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/object_upload')">
+				<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/object_upload','row2')">
 	          		<span class="glyphicon glyphicon-send" style="margin-top: 80%;"></span> 分享
 	        	</a>
 			</div>
 			<div class="col-md-1 column" id="home">
-				<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/person_info')">
+				<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/person_info','row2')">
 	          		<span class="glyphicon glyphicon-user" style="margin-top: 80%;"></span> 用户
 	        	</a>
 			</div>
 			<div class="col-md-1 column" id="home">
-				<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/search')">
+				<a class="btn btn-info btn-lg" id="homebutton" onclick="asy_resp('/user/search','row2')">
 	          		<span class="glyphicon glyphicon-search" style="margin-top: 80%;"></span> 查找
 	        	</a>
 			</div>

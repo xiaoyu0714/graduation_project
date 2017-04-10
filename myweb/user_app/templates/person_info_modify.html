@@ -5,7 +5,7 @@
 			<div class="row clearfix">
 			<div class="col-md-2 column"></div>
 			<div class="col-md-9 column">
-			<form action="/user/person_info_modify" class="personalinfomation" method="POST" enctype="multipart/form-data">
+			<form id="person_info_form" action="" class="personalinfomation" method="POST" enctype="multipart/form-data">
 				{% csrf_token %}
 				<table width="90%" height="auto" border="0" align="right" cellpadding="0" cellspacing="0">
 				    <tr>
@@ -45,7 +45,7 @@
 				    </tr>
 				</table>
 				<div class="row clearfix">
-					<input style="margin-left: 45%;" type="submit" class="btn btn-primary" value="提交" id="" />
+					<input style="margin-left: 45%;" type="button" onclick="person_info_modify()" class="btn btn-primary" value="提交" id="" />
 				</div>
 			</form>
 			</div>

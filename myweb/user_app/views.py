@@ -7,7 +7,7 @@ from .models import User,Object,Order
 from .forms import UploadFileForm,UserForm
 from .utils import handle_uploaded_file
 
-from .notify_const import order_info,object_info
+from .notify_const import order_notify,object_notify,person_notify
 # Create your views here.
 
 def get_session_user(request):
@@ -52,9 +52,12 @@ def object_upload(request):
 						 img=request.FILES['file'],
 						 user=get_session_user(request))
 			obj.save()
-			return HttpResponse('物品添加成功！')
+			return HttpResponse(object_notify['ADD_SUCCEED'])
 		else:
-			return HttpResponse("Form is not valid.")
+			msg = ''
+			for key in form.errors.keys():
+				msg += form.errors[key]
+			return HttpResponse(msg)
 	else:
 		return render(request,'object_upload.html')
 
@@ -72,11 +75,14 @@ def person_info_modify(request):
 	form = UserForm(request.POST,request.FILES,instance=user)
 	if form.is_valid():
 		form.save()
+		user = User.objects.filter(pk=user.pk)
+		request.session['user'] = user_to_json(user)
+		return HttpResponse(person_notify['INFO_MODIFY_SUCCEED'])
 	else:
-		return HttpResponse(form.errors)
-	user = User.objects.get(pk=user.pk)
-	request.session['user'] = user_to_json(user)
-	return index(request)
+		msg = ''
+		for key in form.errors.keys():
+			msg += form.errors[key]
+		return HttpResponse(msg)
 
 # 提交订单
 def order_submit(request):
@@ -86,35 +92,40 @@ def order_submit(request):
 		# 借出商品数
 		order_num = request.POST.get('num',None)
 		if not obj_id or not order_num:
-			return HttpResponse(order_info['INVALID_FORM'])
+			return HttpResponse(order_notify['INVALID_FORM'])
 		if not order_num.isdigit() or int(order_num) == 0:
-			return HttpResponse(order_info['ILLEGAL_OBJECT_NUMBER'])
+			return HttpResponse(order_notify['ILLEGAL_OBJECT_NUMBER'])
 		# 获取objects id,
 		obj = Object.objects.get(pk=obj_id)
 		if not obj:
-			return HttpResponse(order_info['ILLEGAL_OBJECT_ID'])
+			return HttpResponse(order_notify['ILLEGAL_OBJECT_ID'])
 		else:
 			if obj.num < int(order_num):
-				return HttpResponse(order_info['OBJECT_NUMEBR_EXCEED'])
+				return HttpResponse(order_notify['OBJECT_NUMEBR_EXCEED'])
 			if obj.user == get_session_user(request):
-				return HttpResponse(order_info['ILLEGAL_OPERATION'])
+				return HttpResponse(order_notify['ILLEGAL_OPERATION'])
 			else:
 				obj.num -= int(order_num)
 				obj.save()
 				order = Order(user=get_session_user(request),num=order_num,object=obj)
 				order.save()
-				return HttpResponse(order_info['ORDER_SUBMIT_SUCCEED'])
+				return HttpResponse(order_notify['ORDER_SUBMIT_SUCCEED'])
 
 def search(request):
 	# 物品搜索
-	return render(request,'search.html')
+	keyword = request.GET.get('keyword',None)
+	if not keyword:
+		return render(request,'search.html')
+	else:
+		search_objs = Object.objects.filter(name__icontains=keyword)[:5]
+		return render(request,'search.html',{'obj_list':search_objs})
 
 def order_cancel(request):
 	# 取消订单
 	if request.method == 'POST':
 		order_id = request.POST.get('order_id',None)
 		if not order_id:
-			return HttpResponse(order_info['ILLEGAL_ORDER_ID'])
+			return HttpResponse(order_notify['ILLEGAL_ORDER_ID'])
 		order = Order.objects.get(pk=order_id)
 		object = order.object
 		object.num += order.num
@@ -140,8 +151,8 @@ def object_revoke(request):
 			obj = Object.objects.get(pk=int(id))
 			if obj:
 				obj.delete()
-				return HttpResponse(object_info['DELETE_SUCCEED'])
+				return HttpResponse(object_notify['DELETE_SUCCEED'])
 			else:
-				return HttpResponse(order_info['ILLEGAL_OBJECT_ID'])
+				return HttpResponse(order_notify['ILLEGAL_OBJECT_ID'])
 	else:
 		return HttpResponse(status=404)
